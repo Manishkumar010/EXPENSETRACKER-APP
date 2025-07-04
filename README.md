@@ -69,7 +69,7 @@ Check it out here: [https://expensetracker-app-frontend.onrender.com](https://ex
    # Frontend
    cd frontend
    npm install
-   npm start   # Runs on http://localhost:3000
+   npm start   # Runs on http://localhost:8000
 
    # Backend
    cd ../backend
