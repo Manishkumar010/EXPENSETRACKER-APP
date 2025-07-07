@@ -35,7 +35,7 @@ export const prepareExpenseBarChartData = (data = []) => {
     }))
 
     return chartData
-}
+};
 
 export const prepareIncomeBarChartData = (data = []) =>{
     const sorteData = [...data].sort((a,b)=> new Date(a.date)- new Date(b.Date))
@@ -47,3 +47,4 @@ export const prepareIncomeBarChartData = (data = []) =>{
     }));
     return chartData
 };
+
