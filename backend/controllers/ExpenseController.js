@@ -32,10 +32,11 @@ exports.getAllExpense = async (req, res) => {
     const userId = req.user.id;
 
     try {
-        const Expense = await Expense.find({ userId }).sort({ date: -1 });
-        res.json(Expense)
+        const expenses = await Expense.find({ userId }).sort({ date: -1 });
+        res.json(expenses);
     } catch (error) {
-        res.status(500).json({ message: "Server Error" })
+        console.error(error);
+        res.status(500).json({ message: "Server Error" });
     }
 };
 
@@ -54,23 +55,27 @@ exports.deleteExpense = async (req, res) => {
 exports.downloadExpenseExcel = async (req, res) => {
     const userId = req.user.id;
     try {
-        const expense = await Expense.find({ userId }).sort({ date: -1 });
+        const expenses = await Expense.find({ userId }).sort({ date: -1 });
 
-        // Prepare daate for Excel
-        const data = expense.map((itme) => ({
-            Category: itme.category,
-            Amount: itme.amount,
-            Date: itme.date
+        // Prepare data for Excel
+        const data = expenses.map((item) => ({
+            Category: item.category,
+            Amount: item.amount,
+            Date: item.date
         }));
 
         const wb = xlsx.utils.book_new();
-        const ws = xlsx.utils.json_to_sheet(date);
+        const ws = xlsx.utils.json_to_sheet(data);
         xlsx.utils.book_append_sheet(wb, ws, "Expense");
-        xlsx.writeFile(wb, 'Expense_details.xlsx');
-        res.download('Expense_details.xlsx');
-    } catch (error) {
-        res.status(500).json({ message: "Server Error" })
 
+        // Write to buffer instead of file
+        const buffer = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
+        res.setHeader('Content-Disposition', 'attachment; filename="Expense_details.xlsx"');
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.send(buffer);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server Error" });
     }
-}
+};
 

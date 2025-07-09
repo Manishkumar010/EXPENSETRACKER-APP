@@ -22,6 +22,7 @@ exports.addIncome = async (req, res) => {
         await newIncome.save();
         res.status(200).json(newIncome)
     } catch (error) {
+        console.error("Error adding income:", error);
         res.status(500).json({ message: "Server Error" });
     }
 }
@@ -34,6 +35,7 @@ exports.getAllIncome = async (req, res) => {
         const income = await Income.find({ userId }).sort({ date: -1 });
         res.json(income)
     } catch (error) {
+        console.error("Error fetching incomes:", error);
         res.status(500).json({ message: "Server Error" })
     }
 };
@@ -63,7 +65,7 @@ exports.downloadIncomeExcel = async (req, res) => {
         }));
 
         const wb = xlsx.utils.book_new();
-        const ws = xlsx.utils.json_to_sheet(date);
+        const ws = xlsx.utils.json_to_sheet(data);
         xlsx.utils.book_append_sheet(wb, ws, "Income");
         xlsx.writeFile(wb, 'income_details.xlsx');
         res.download('income_details.xlsx');

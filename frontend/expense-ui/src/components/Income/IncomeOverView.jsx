@@ -5,13 +5,12 @@ import CustomBarChart from '../Charts/CustomBarChart'
 
 const IncomeOverView = ({ transactions, onAddIncome }) => {
     const [chartData, setChartData] = useState([])
+    console.log("chartData", chartData)
 
     useEffect(() => {
         const result = prepareIncomeBarChartData(transactions)
         setChartData(result)
-
-        return () => { };
-    }, [])
+    }, [transactions]) // <-- add transactions here
     return (
         <div className='card'>
             <div className="flex items-center justify-between">

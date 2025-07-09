@@ -7,7 +7,7 @@ const IncomeSchema = new mongoose.Schema({
     icon:{type:String},
     source:{type:String,required:true},
     amount:{type:Number,required:true},
-    amount:{type:Date,default: Date.now},
+    date:{type:Date,default: Date.now},
 
 },{timestamps:true});
 

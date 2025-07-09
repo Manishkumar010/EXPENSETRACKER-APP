@@ -1,4 +1,3 @@
-import { Axios } from 'axios'
 import React from 'react'
 
 import {
@@ -8,16 +7,19 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend,
     ResponsiveContainer,
     Cell
 } from "recharts"
 
 const CustomBarChart = ({data}) => {
-
+    // console.log("Chart data:", data);
+    // Check if data is empty
+    if (!data || data.length === 0) {
+        return <div className="text-center text-gray-500 py-8">No data to display</div>;
+    }
     // function to alternate color
     const getBarColor = (index)=>{
-        return index % 2===0 ? "#875cf5" : "cfbefb";
+        return index % 2===0 ? "#875cf5" : "#cfbefb";
     }
 
     const CusTomTooltip = ({active,payload})=>{
@@ -43,7 +45,7 @@ const CustomBarChart = ({data}) => {
         <ResponsiveContainer width="100%" height={300}>
             <BarChart data={data}>
                 <CartesianGrid stroke='none'/>
-                <XAxis dataKey="month" tick={{ fontSize:12, fill:"#555"}} stroke="none" />
+                <XAxis dataKey="category" tick={{ fontSize:12, fill:"#555"}} stroke="none" />
                 <YAxis tick={{ fontSize:12, fill:"#555"}} stroke="none" />
 
                 <Tooltip content={CusTomTooltip}/>
