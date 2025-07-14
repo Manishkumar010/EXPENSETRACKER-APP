@@ -12,7 +12,7 @@ const app = express();
 // middleware to handle cors
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://expensetracker-app-frontend.onrender.com',
+  'https://dashing-clafoutis-a76248.netlify.app/',
 ];
 
 app.use(cors({
