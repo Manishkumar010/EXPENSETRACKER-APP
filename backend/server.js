@@ -12,7 +12,7 @@ const app = express();
 // middleware to handle cors
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://dashing-clafoutis-a76248.netlify.app',
+  'https://expensetask.netlify.app',
 ];
 
 app.use(cors({
