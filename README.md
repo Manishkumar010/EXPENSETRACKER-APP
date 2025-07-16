@@ -6,7 +6,7 @@ A Full Stack application to help users track, manage, and analyze their expenses
 
 ## 🔗 Live Demo
 
-Check it out here: [https://expensetracker-app-frontend.onrender.com](https://expensetracker-app-frontend.onrender.com)
+Check it out here: https://expensetask.netlify.app/
 
 ---
 
