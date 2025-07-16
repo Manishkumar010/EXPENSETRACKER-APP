@@ -21,6 +21,7 @@ const Income = () => {
     data: null
   });
 
+  
   const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false)
 
   // get all Income Details

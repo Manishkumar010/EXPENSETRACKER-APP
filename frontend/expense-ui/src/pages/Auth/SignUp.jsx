@@ -18,8 +18,8 @@ const SignUp = () => {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
-    const { updateUser } = useContext(UserContext)
-  
+  const { updateUser } = useContext(UserContext)
+
 
 
   const handleSignUp = async (e) => {
@@ -46,32 +46,36 @@ const SignUp = () => {
     try {
 
       // upload image if present 
-      if(!profilePic){
-        const imgUploadRes = await uploadImage(profilePic);
+      let profileImageUrl = "";
 
-        profileImageUrl = imgUploadRes.imageUrl || ""
+      if (profilePic) {
+        const imgUploadRes = await uploadImage(profilePic);
+        console.log("Upload response:", imgUploadRes); // 🔍 Add this
+        profileImageUrl = imgUploadRes.imageUrl || imgUploadRes.url || imgUploadRes.data?.url || "";
       }
 
-      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER,{
+
+
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
         fullName,
         email,
         password,
-        // profileImageUrl
+        profileImageUrl
 
       });
 
       const { token, user } = response.data;
 
-      if(token){
-        localStorage.setItem("token",token);
+      if (token) {
+        localStorage.setItem("token", token);
         updateUser(user);
         navigate("/dashboard");
       }
     } catch (error) {
-      if(error.response && error.response.data.message){
+      if (error.response && error.response.data.message) {
         setError(error.response.data.message)
-      }else{
-        setError("Something went wrong. Please try again",error);
+      } else {
+        setError("Something went wrong. Please try again", error);
       }
     }
 
@@ -117,7 +121,7 @@ const SignUp = () => {
 
           {error && <p className='text-red-500 text-sx pb-2.5'>{error}</p>}
 
-          <button type='submit' className='btn-primary'>
+          <button type='submit' className='btn-primary cursor-pointer'>
             SIGN UP
           </button>
 

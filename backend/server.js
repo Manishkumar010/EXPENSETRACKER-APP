@@ -39,7 +39,6 @@ app.use("/api/v1/dashboard",dashboardRoutes)
 
 // Serve upload folder
 app.use("/uploads",express.static(path.join(__dirname,"uploads")));
-app.use("/upload", express.static("upload"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

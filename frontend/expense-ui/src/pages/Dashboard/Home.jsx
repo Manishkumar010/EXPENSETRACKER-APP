@@ -47,6 +47,8 @@ const Home = () => {
     fetchDashboardData();
   }, []);
 
+  console.log(dashboardData)
+
   return (
     <DashboardLayout activeMenu="Dashboard">
       <div className='my-5 mx-auto'>
@@ -54,7 +56,7 @@ const Home = () => {
           <InfoCard
             icon={<IoMdCard />}
             label="Total Balance"
-            value={addThousandsSeparator(dashboardData?.totalBalance || 0)}
+            value={addThousandsSeparator(dashboardData?.totaBalance || 0)}
             color="bg-primary"
           />
 
@@ -68,7 +70,7 @@ const Home = () => {
           <InfoCard
             icon={<LuHandCoins />}
             label="Total Expense"
-            value={addThousandsSeparator(dashboardData?.totalExpenses || 0)}
+            value={addThousandsSeparator(dashboardData?.totalExpense || 0)}
             color="bg-red-500"
           />
         </div>
@@ -80,12 +82,12 @@ const Home = () => {
 
           <FinanceOverview
             totalBalance={dashboardData?.totalBalance || 0}
-            totalIncome={dashboardData?.totalIncome || 0}
+            totalIncome={dashboardData?.totaIncome || 0}
             totalExpense={dashboardData?.totalExpense}
           />
 
           <ExpenseTransaction
-            transaction={dashboardData?.last30DaysExpenses?.transactions || []}
+            transaction={dashboardData?.last30DaysExpenses?.transaction || []}
             onSeeMore={() => navigate("/expense")}
           />
 
@@ -94,12 +96,12 @@ const Home = () => {
           />
 
           <RecentIncomeWithChart
-            data={dashboardData?.last60DaysIncome?.transactions?.slice(0, 4) || []}
+            data={dashboardData?.last60DaysIncome?.transaction?.slice(0, 4) || []}
             totalIncome={dashboardData?.totalIncome || 0}
           />
 
           <RecentIncome
-            transactions={dashboardData?.last60DaysIncome?.transactions || []}
+            transactions={dashboardData?.last60DaysIncome?.transaction || []}
             onSeeMore={() => navigate("/income")}
           />
         </div>

@@ -18,7 +18,7 @@ const AddIncomeForm = ({ onAddIncome }) => {
 
             <EmojiPickerPopup
                 icon={income.icon}
-                onSelectedd={(selectedIcon) => handleChange("icon", selectedIcon)}
+                onSelected={(selectedIcon) => handleChange("icon", selectedIcon)}
             />
             <Input
                 value={income.source}

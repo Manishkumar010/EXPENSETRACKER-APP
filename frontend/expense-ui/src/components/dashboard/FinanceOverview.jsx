@@ -6,7 +6,6 @@ const COLORS = ["#875CF5", "FA2C37", "FF6900"];
 const FinanceOverview = ({ totalBalance, totalIncome, totalExpense }) => {
 
     const balanceData = [
-        { name: "Total Balancce", amount: totalBalance },
         { name: "Total Expense", amount: totalExpense },
         { name: "Total Income", amount: totalIncome },
     ];
@@ -18,8 +17,8 @@ const FinanceOverview = ({ totalBalance, totalIncome, totalExpense }) => {
 
             <CustomPieChart
                 data={balanceData}
-                label="Total Balace"
-                totalAmount={`$${totalBalance}`}
+                label="Total Balance"
+                totalAmount={`$${ totalExpense -totalIncome}`}
                 colors={COLORS}
                 showTextAnchor
             />
